@@ -5,6 +5,7 @@ import cors from 'cors';
 import { UserRoutes } from './src/modules/user/user.router';
 import { authRouter } from './src/modules/auth/auth.router';
 import { mediaRouter } from './src/modules/media/media.router';
+import { ensureReady } from './src/lib/ensureReady';
 const app = express();
 
 const allowedOrigins = [
@@ -19,7 +20,8 @@ const corsOptions: cors.CorsOptions = {
 
     if (
       allowedOrigins.includes(origin) ||
-      /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)
+      /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin) ||
+      /^https:\/\/[\w-]+\.vercel\.app$/.test(origin)
     ) {
       return callback(null, true);
     }
@@ -36,6 +38,15 @@ app.options(/.*/, cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(async (_req, _res, next) => {
+  try {
+    await ensureReady();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
