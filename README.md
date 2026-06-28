@@ -70,7 +70,12 @@ pnpm dev               # http://localhost:3001
 ## Environment Variables
 
 ```env
+# Local MongoDB:
 DATABASE_URL=mongodb://localhost:27017/myapp
+
+# Or MongoDB Atlas (use this if you connect to Atlas):
+# DATABASE_URL=mongodb+srv://<username>:<password>@cluster0.xqeuph5.mongodb.net/ai_code_explainer?appName=Cluster0
+
 PORT=3001
 FRONTEND_URL=http://localhost:3000
 
@@ -380,6 +385,8 @@ Allowed origins:
 ## License
 
 ISC
-#   c o d e - e x p l a i n e r  
- #   a i _ c o d e _ e x p l a i n e r  
+#   c o d e - e x p l a i n e r 
+ 
+ #   a i _ c o d e _ e x p l a i n e r 
+ 
  
