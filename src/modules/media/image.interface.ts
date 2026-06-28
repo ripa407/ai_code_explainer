@@ -1,0 +1,11 @@
+import type { Types } from 'mongoose';
+
+export interface IImage {
+  _id?: Types.ObjectId;
+  userId: Types.ObjectId;
+  name: string;
+  url: string;
+  r2_key: string;
+  alt?: string;
+  createdAt?: Date;
+}
